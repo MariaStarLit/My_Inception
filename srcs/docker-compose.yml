@@ -1,0 +1,63 @@
+services:
+  mariadb:
+    container_name: mariadb
+    build: ./requirements/mariadb
+    env_file:
+      - .env
+    networks:
+      - inception42
+    volumes:
+      - mariadb_data:/var/lib/mysql
+    restart: always
+
+  wordpress:
+    container_name: wordpress
+    build: ./requirements/wordpress
+    env_file:
+      - .env
+    networks:
+      - inception42
+    restart: always
+    volumes:
+      - wordpress_data:/var/www/wordpress
+
+  nginx:
+    container_name: nginx
+    build: ./requirements/nginx
+    networks:
+      - inception42
+    ports:
+      - '443:443'
+    restart: always
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress_data:/var/www/wordpress
+
+  adminer:
+    image: adminer
+    container_name: adminer
+    networks:
+      - inception42
+    restart: always
+    ports:
+      - '8080:8080'
+
+volumes:
+  wordpress_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/mde-avel/data/wordpress
+      o: bind
+
+  mariadb_data:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/mde-avel/data/mariadb
+      o: bind
+
+networks:
+  inception42:
+    name: inception42
