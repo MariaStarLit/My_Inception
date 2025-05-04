@@ -55,4 +55,3 @@ This document lists essential Docker CLI commands for building, running, and deb
 | `curl -I https://mde-avel.42.fr` | Check certifivate of SSL/TLS (can add -k)|
 | `https://mde-avel.42.fr/wp/admin` | Sign in as Administrator |
 | `docker network ls` | See all networks |
-| `docker exec -it wordpress wp db check --allow-root` | Prove conection os WD to the Data Base |
