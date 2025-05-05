@@ -47,11 +47,22 @@ This document lists essential Docker CLI commands for building, running, and deb
 | `docker system prune` | Remove unused data (⚠️ use carefully). |
 
 ---
-
 ## Extra Commands
 
 | Command | Description |
 |---------|-------------|
 | `curl -I https://mde-avel.42.fr` | Check certifivate of SSL/TLS (can add -k)|
-| `https://mde-avel.42.fr/wp/admin` | Sign in as Administrator |
+| `https://mde-avel.42.fr/wp-admin` | Sign in as Administrator |
 | `docker network ls` | See all networks |
+
+---
+
+## Cleaning
+
+| Command | Description |
+|---------|-------------|
+| `docker stop $(docker ps -qa)` | Stop containers |
+| `docker rm $(docker ps -qa)` | Remove containers |
+| `docker rmi -f $(docker images -qa)` | Remove images |
+| `docker volume rm $(docker volume ls -q)` | Remove volumes |
+| `docker network rm $(docker network ls -q) 2>/dev/null` | Remove network |
